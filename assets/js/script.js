@@ -33,6 +33,19 @@ var post = Vue.component('post', {
   }
 });
 
+Vue.filter('uppercase', function(value) {
+  return value.toUpperCase();
+});
+
+Vue.filter('truncate', function(value){
+  var length = 60;
+  if(value.length <= length){
+    return value;
+  } else {
+    return value.substring(0, length) + '...';
+  }
+});
+
 new Vue({
   el: "#main"
 });
