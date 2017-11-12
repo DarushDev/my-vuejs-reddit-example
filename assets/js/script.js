@@ -10,11 +10,26 @@ var subreddit = Vue.component('subreddit', {
   created: function () {
     this.$http.get("https://www.reddit.com/r/" + this.name + "/top.json?limit=5")
       .then(function (resp) {
-        if(typeof reps.data === 'string') {
+        if (typeof reps.data === 'string') {
           reps.data = JSON.parse(resp.data);
         }
         this.posts = resp.data.data.children;
       })
+  }
+});
+
+// Child | Component representing a single post
+var post = Vue.component('post', {
+  template: "#post",
+  props: ['item'],
+  methods: {
+    getImageBackgroundCss: function (img) {
+      if (img && img !== 'self' && img !== 'nsfw') {
+        return 'background-image: url(' + img + ')';
+      } else {
+        return 'background-image: url(assets/img/placeholder.png'
+      }
+    }
   }
 });
 

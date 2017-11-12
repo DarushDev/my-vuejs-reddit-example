@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Display IP Adress</title>
+</head>
+<body>
+
+<template id="subreddit">
+
+	<div class="subreddit">
+		<h2>{{ name | uppercase }}</h2>
+
+		<ul class="item-list">
+			<li v-for="obj in posts">
+				<post :item="obj"></post>
+			</li>
+		</ul>
+	</div>
+
+</template>
+
+<script>
+
+</script>
+	<script src="assets/js/script.js"></script>
+</body>
+</html>
