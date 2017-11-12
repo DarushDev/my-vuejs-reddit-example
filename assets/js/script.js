@@ -1,3 +1,7 @@
+/*-----------------
+    Components
+-----------------*/
+
 // Parent | Subreddit component containing a list of 'post' components.
 var subreddit = Vue.component('subreddit', {
   template: '#subreddit',
@@ -10,8 +14,8 @@ var subreddit = Vue.component('subreddit', {
   created: function () {
     this.$http.get("https://www.reddit.com/r/" + this.name + "/top.json?limit=5")
       .then(function (resp) {
-        if (typeof reps.data === 'string') {
-          reps.data = JSON.parse(resp.data);
+        if (typeof resp.data === 'string') {
+          resp.data = JSON.parse(resp.data);
         }
         this.posts = resp.data.data.children;
       })
@@ -33,10 +37,16 @@ var post = Vue.component('post', {
   }
 });
 
+/*-----------------
+   Custom filters
+-----------------*/
+
+// Transform text to uppercase
 Vue.filter('uppercase', function(value) {
   return value.toUpperCase();
 });
 
+// Cut off text if too long
 Vue.filter('truncate', function(value){
   var length = 60;
   if(value.length <= length){
@@ -46,6 +56,9 @@ Vue.filter('truncate', function(value){
   }
 });
 
+/*-----------------
+   Initialize app
+-----------------*/
 new Vue({
   el: "#main"
 });
